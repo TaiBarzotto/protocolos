@@ -7,42 +7,74 @@ def configure_swagger(server):
         swagger.template = {}
     
     swagger.template["definitions"] = {
-        "Processos_arquivar": {
+        "Ppc": {
             "type": "object",
             "properties": {
-                "processo": {
+                "curso": {"type": "string"},
+                "descricao": {"type": "string"},
+                "versao": {"type": "string"},
+                "status": {"type": "string"},
+                "unidade": {"type": "integer"},
+                "conteudo": {"type": "string"},
+                "dta_criacao": {"type": "string", "format": "date"},
+                "ativo": {"type": "string"}
+            }
+        },
+        "QueryPpc": {
+            "type": "object",
+            "properties": {
+                "ppc": {"type": "string"}
+            }
+        },
+        "Ppcs": {
+            "type": "object",
+            "properties": {
+                "ppcs": {
                     "type": "array",
-                    "items": {"type": "string"}
+                    "items": {"$ref": "#/definitions/Ppc"}
                 },
-                "acao": {
-                    "type": "integer",
-                    "description": "1 para arquivar, 0 para desarquivar"
-                },
-                "observacao": {"type": "string"}
+                "count": {"type": "integer"}
             }
         },
-        "Interessado": {
+        "Referencia": {
             "type": "object",
             "properties": {
-                "categoria": {"type": "string"},
-                "nome": {"type": "string"},
-                "notificar": {"type": "boolean"},
-                "email": {"type": "boolean"}
+                "ccr": {"type": "integer"},
+                "dta_criacao": {"type": "string", "format": "date"},
+                "referencia": {"type": "string"},
+                "ativa": {"type": "boolean"},
+                "dta_ativacao": {"type": "string", "format": "date"},
+                "dta_desativacao": {"type": "string", "format": "date"},
+                "tipo": {"type": "string"}
             }
         },
-        "Processo": {
+        "Ccr": {
             "type": "object",
             "properties": {
-                "tipo_processo": {"type": "string"},
-                "processo_eletronico": {"type": "boolean"},
-                "assunto_detalhado": {"type": "string"},
-                "natureza": {"type": "string"},
-                "observacao": {"type": "string"},
-                "interessados": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/definitions/Interessado"
-                    }
+                "codigo": {"type": "string"},
+                "descricao": {"type": "string"},
+                "ementa": {"type": "string"},
+                "objetivo": {"type": "string"},
+                "status": {"type": "string"},
+                "dta_atualizacao": {"type": "string", "format": "date"},
+                "modalidade": {"type": "integer"},
+                "obrigatorio": {"type": "integer"},
+                "dominio": {"type": "integer"},
+                "carga_horaria_presencial": {"type": "integer"},
+                "carga_horaria_ead": {"type": "integer"},
+                "hrs_presencial_teorica": {"type": "integer"},
+                "hrs_presencial_pratica": {"type": "integer"},
+                "hrs_presencial_extensao": {"type": "integer"},
+                "hrs_ead_teorica": {"type": "integer"},
+                "hrs_ead_pratica": {"type": "integer"},
+                "hrs_estagio_extensionista": {"type": "integer"},
+                "hrs_estagio_ead": {"type": "integer"},
+                "hrs_estagio_presencial": {"type": "integer"},
+                "hrs_tcc_discente_orientada": {"type": "integer"},
+                "num_avaliacoes": {"type": "integer"},
+                "referencias": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/Referencia"}
                 }
             }
         },
@@ -63,5 +95,5 @@ def configure_swagger(server):
             }
         }
     }
-
+    
     return swagger

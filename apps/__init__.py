@@ -13,10 +13,10 @@ specs.register(server)  # Registrar o specs
 swagger = configure_swagger(server)  # Configura o Swagger usando o módulo externo
 
 # Inicializando os módulos
-from apps.trabalhar_SIPAC import init_app as init_protocolo
+from apps.trab_com_ccrs import init_app as init_ccrs
 from apps.utilities import init_app as init_util
 
-init_protocolo(server)
+init_ccrs(server)
 init_util(server)
 
 @server.route('/test', methods=['GET'])
@@ -28,7 +28,8 @@ def test_route():
 def home():
     base_url = request.url_root.rstrip('/')
     
-    texto = '<h2> API para trabalhar com protocolos no SIPAC</h2>'
+    texto = '<h2> API para cadastrar e/ou consultar dados no SIGAA</h2>'
     texto = texto + f'<h4> 1) Para usar o SWAGGER para testar esta API, use a rota <a href="{base_url}/apidocs">/apidocs</a></h4>'
-    texto = texto + f'<h4> 2) Para arquivar um processo, use a rota <a href="{base_url}/ccrs/ccr">/ccrs/ccr</a></h4>'
+    texto = texto + f'<h4> 2) Para cadastrar um CCR no SIGAA, use a rota <a href="{base_url}/ccrs/ccr">/ccrs/ccr</a></h4>'
+    texto = texto + f'<h4> 3) Para manter CCRs e Referências no Pergamum, use a rota <a href="{base_url}/ccrs/pergamum">/ccrs/pergamum</a></h4>'
     return texto
