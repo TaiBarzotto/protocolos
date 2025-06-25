@@ -13,10 +13,10 @@ specs.register(server)  # Registrar o specs
 swagger = configure_swagger(server)  # Configura o Swagger usando o módulo externo
 
 # Inicializando os módulos
-from apps.trab_com_ccrs import init_app as init_ccrs
+from apps.trabalhar_SIPAC import init_app as init_protocolo
 from apps.utilities import init_app as init_util
 
-init_ccrs(server)
+init_protocolo(server)
 init_util(server)
 
 @server.route('/test', methods=['GET'])
